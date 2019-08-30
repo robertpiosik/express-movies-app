@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import validator from "validator";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 import { User, UserDocument } from "../models/user";
 
@@ -76,5 +77,7 @@ export const login = async (
 			message: "Email or password is missing."
 		});
 	}
-	res.sendStatus(200);
+	// find user
+	// return user not found or generate jwt
+	// return auth data
 };
