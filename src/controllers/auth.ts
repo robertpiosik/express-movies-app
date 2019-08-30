@@ -15,6 +15,12 @@ export const signup = async (
 		});
 	}
 	res.sendStatus(200);
+
+	// validate email and password
+	// check if user is not registered, if yes throw
+	// process password with bcrypt
+	// put user into db
+	// return success
 };
 
 export const login = async (
