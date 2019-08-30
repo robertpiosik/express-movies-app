@@ -1,4 +1,4 @@
-// Imports something to be treated as module 
+// Imports something to be treated as module
 import * as ts from "typescript";
 
 declare global {
@@ -6,14 +6,19 @@ declare global {
 		interface ProcessEnv {
 			NODE_ENV: "development" | "production";
 			PORT: string;
-			DBATABASE_CONNECTION: string;
+			DATABASE_CONNECTION: string;
 			JWT_PRIVATE_KEY: string;
 		}
 	}
-	namespace Express {
-		interface Request {
-			isAuth: boolean;
-			userId: string;
-		}
+}
+
+declare module "express" {
+	interface Request {
+		isAuth?: boolean;
+		userId?: string;
+	}
+	interface ErrorRequestHandler {
+		status?: number;
+		data?: any;
 	}
 }

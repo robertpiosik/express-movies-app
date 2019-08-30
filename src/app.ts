@@ -14,6 +14,7 @@ import checkAuth from "./middleware/check-auth";
 // import graphqlResolvers from "./graphql/resolvers";
 
 import authRoutes from "./routes/auth";
+import { NextFunction } from "connect";
 
 const app: Application = express();
 
@@ -22,16 +23,18 @@ app.use(helmet());
 app.use(cors());
 app.use(responseTime());
 
-app.use(checkAuth);
-
-app.use(authRoutes);
-
+// Am I alive?
 app.get("/", (req, res, next) => {
-	const x:string = 's';
-	const c = 'ss';
-	res.send("okk2");
+	res.sendStatus(200);
 });
 
+// Check authorization header
+app.use(checkAuth);
+
+// REST routes
+app.use("/api/v1", authRoutes);
+
+// graphQL route
 // app.use(
 // 	"/graphql",
 // 	graphqlHttp({
@@ -49,13 +52,10 @@ app.get("/", (req, res, next) => {
 // 	})
 // );
 
-interface ErrorRequestHandlerExtended extends ErrorRequestHandler {
-	status: number;
-	data: any;
-}
+// prettier-ignore
 
 // Error handling
-app.use((error: ErrorRequestHandlerExtended, req: Request, res: Response) => {
+app.use((error: ErrorRequestHandler, req: Request, res: Response, next: NextFunction) => {
 	console.log(error);
 	const status = error.status || 500;
 	const name = error.name || "ServerError";

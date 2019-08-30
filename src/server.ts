@@ -5,7 +5,7 @@ import app from "./app";
 
 mongoose
 	.connect(
-		`mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_SERVER}/${process.env.DB_NAME}?authSource=admin`,
+		`${process.env.DATABASE_CONNECTION}`,
 		{ useNewUrlParser: true, useCreateIndex: true }
 	)
 	.catch(err => {
