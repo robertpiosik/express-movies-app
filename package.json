@@ -4,7 +4,8 @@
 	"private": true,
 	"scripts": {
 		"build": "npx tsc",
-		"test": "npx jest"
+		"test": "npx jest",
+		"test-watch": "npx jest --watch"
 	},
 	"dependencies": {
 		"cors": "^2.8.5",
@@ -27,8 +28,8 @@
 		"@types/helmet": "0.0.44",
 		"@types/jest": "^24.0.18",
 		"@types/jsonwebtoken": "^8.3.3",
-		"@types/mongoose": "^5.5.13",
-		"@types/node": "^12.7.2",
+		"@types/mongoose": "^5.5.16",
+		"@types/node": "^12.7.3",
 		"@types/node-fetch": "^2.5.0",
 		"@types/response-time": "^2.3.4",
 		"@types/supertest": "^2.0.8",
@@ -36,6 +37,6 @@
 		"nodemon": "^1.19.1",
 		"supertest": "^4.0.2",
 		"ts-jest": "^24.0.2",
-		"typescript": "^3.5.3"
+		"typescript": "^3.6.2"
 	}
 }

@@ -1,6 +1,16 @@
 import request, { Response } from "supertest";
 import app from "../app";
 
+describe("POST /api/v1/auth/signup", () => {
+	it("without email or password should return 422 'Unprocessable Entity'", () => {
+		return request(app)
+			.post("/api/v1/auth/signup")
+			.expect((res: Response) => {
+				expect(res.status).toBe(422);
+			});
+	});
+});
+
 describe("POST /api/v1/auth/login", () => {
 	it("without email or password should return 422 'Unprocessable Entity'", () => {
 		return request(app)
