@@ -1,24 +1,40 @@
 {
 	"name": "netguru-movies",
-	"version": "1.0.0",
 	"author": "Robert Piosik",
 	"private": true,
 	"scripts": {
-		"dev": "nodemon srcapp.js",
-		"start": "node src/app.js"
+		"build": "npx tsc",
+		"test": "npx jest"
 	},
 	"dependencies": {
-		"@koa/cors": "^3.0.0",
+		"cors": "^2.8.5",
+		"bcryptjs": "^2.4.3",
 		"dotenv": "^8.1.0",
+		"express": "^4.17.1",
+		"express-graphql": "^0.9.0",
+		"graphql": "^14.5.4",
+		"helmet": "^3.20.1",
 		"jsonwebtoken": "^8.5.1",
-		"koa": "^2.8.1",
-		"koa-bodyparser": "^4.2.1",
-		"koa-helmet": "^5.1.0",
-		"koa-router": "^7.4.0",
 		"mongoose": "^5.6.11",
-		"node-fetch": "^2.6.0"
+		"node-fetch": "^2.6.0",
+		"response-time": "^2.3.2",
+		"validator": "^11.1.0"
 	},
 	"devDependencies": {
-		"nodemon": "^1.19.1"
+		"@types/bcryptjs": "^2.4.2",
+		"@types/cors": "^2.8.6",
+		"@types/express": "^4.17.1",
+		"@types/helmet": "0.0.44",
+		"@types/jest": "^24.0.18",
+		"@types/jsonwebtoken": "^8.3.3",
+		"@types/mongoose": "^5.5.13",
+		"@types/node": "^12.7.2",
+		"@types/node-fetch": "^2.5.0",
+		"@types/response-time": "^2.3.4",
+		"jest": "^24.9.0",
+		"nodemon": "^1.19.1",
+		"supertest": "^4.0.2",
+		"ts-jest": "^24.0.2",
+		"typescript": "^3.5.3"
 	}
 }
