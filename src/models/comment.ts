@@ -1,10 +1,10 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-interface commentSchema extends Document {
-	author: string,
-	movie: string,
-	content: string
-}
+export interface CommentDocument extends Document {
+	author: string;
+	movie: string;
+	content: string;
+};
 
 const commentSchema: Schema = new Schema(
 	{
@@ -18,9 +18,12 @@ const commentSchema: Schema = new Schema(
 			ref: "Movie",
 			required: true
 		},
-		content: String,
+		content: String
 	},
 	{ timestamps: true }
 );
 
-export default mongoose.model<commentSchema>('Comment', commentSchema);
+export const Comment = mongoose.model<CommentDocument>(
+	"Comment",
+	commentSchema
+);

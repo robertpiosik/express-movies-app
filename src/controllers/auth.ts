@@ -1,12 +1,15 @@
 import { Request, Response, NextFunction } from "express";
 import validator from "validator";
+import bcrypt from "bcryptjs";
+
+import { User, UserDocument } from "../models/user";
 
 export const signup = async (
 	req: Request,
 	res: Response,
 	next: NextFunction
 ) => {
-	const { email, password } = req.body;
+	const { email, password }: { email: string; password: string } = req.body;
 
 	if (!email || !password) {
 		return next({
@@ -32,11 +35,31 @@ export const signup = async (
 		});
 	}
 
-	res.sendStatus(200);
-	// check if user is not registered, if yes throw
-	// process password with bcrypt
-	// put user into db
-	// return success
+	try {
+		const user = await User.findOne({ email });
+		if (!user) {
+			const hashedPassword: string = await bcrypt.hash(password, 10);
+			const newUser = new User({
+				email,
+				password: hashedPassword
+			});
+			await newUser.save();
+			next({
+				status: 201,
+				name: "Success",
+				message: "User account registered successfully.",
+				data: {id: newUser._id.toString()}
+			});
+		} else {
+			next({
+				status: 422,
+				name: "AlreadyRegistered",
+				message: "Account with this e-mail address is already registered."
+			});
+		}
+	} catch (error) {
+		next({ data: error });
+	}
 };
 
 export const login = async (
