@@ -2,6 +2,7 @@ import mongoose, { Schema, Document } from "mongoose";
 
 interface commentSchema extends Document {
 	author: string,
+	movie: string,
 	content: string
 }
 
