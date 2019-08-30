@@ -1,4 +1,4 @@
-const request = require("supertest");
+import request, { Response } from "supertest";
 import app from "../app";
 
 describe("GET /", () => {
@@ -6,13 +6,5 @@ describe("GET /", () => {
 		return request(app)
 			.get("/")
 			.expect(200);
-	});
-});
-
-describe("POST /api/v1/auth/login", () => {
-	it("without email or password should return 422 'Unprocessable Entity'", () => {
-		return request(app)
-			.post("/api/v1/auth/login")
-			.expect(422);
 	});
 });

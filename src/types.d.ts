@@ -19,6 +19,7 @@ declare module "express" {
 	}
 	interface ErrorRequestHandler {
 		status?: number;
+		message?: string; 
 		data?: any;
 	}
 }

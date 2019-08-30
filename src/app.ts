@@ -56,11 +56,11 @@ app.use("/api/v1", authRoutes);
 
 // Error handling
 app.use((error: ErrorRequestHandler, req: Request, res: Response, next: NextFunction) => {
-	console.log(error);
 	const status = error.status || 500;
 	const name = error.name || "ServerError";
+	const message = error.message || "";
 	const data = error.data;
-	res.status(status).json({ status, name, data });
+	res.status(status).json({ status, name, message, data });
 });
 
 export default app;
