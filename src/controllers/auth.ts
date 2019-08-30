@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import validator from 'validator';
 
 export const signup = async (
 	req: Request,
@@ -11,12 +12,20 @@ export const signup = async (
 		return next({
 			status: 422,
 			name: "MissingAuthData",
-			message: "Email or password is missing"
+			message: "Email or password is missing."
 		});
 	}
+	
+	// Validate email
+	if(!validator.isEmail(email)) {
+		return next({
+			status: 422,
+			name: "InvalidEmail",
+			message: "Provided E-mail address is invalid."
+		})
+	}
+	
 	res.sendStatus(200);
-
-	// validate email and password
 	// check if user is not registered, if yes throw
 	// process password with bcrypt
 	// put user into db

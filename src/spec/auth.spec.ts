@@ -18,6 +18,15 @@ describe("POST /api/v1/auth/signup", () => {
 				expect(res.status).not.toBe(422);
 			});
 	});
+
+	it("should return 422 on invalid email", () => {
+		return request(app)
+			.post("/api/v1/auth/signup")
+			.send({ email: "piosiknetguru.com", password: "1234" })
+			.expect((res: Response) => {
+				expect(res.status).toBe(422);
+			});
+	});
 });
 
 describe("POST /api/v1/auth/login", () => {
