@@ -1,0 +1,24 @@
+{
+	"name": "netguru-movies",
+	"version": "1.0.0",
+	"author": "Robert Piosik",
+	"private": true,
+	"scripts": {
+		"dev": "nodemon srcapp.js",
+		"start": "node src/app.js"
+	},
+	"dependencies": {
+		"@koa/cors": "^3.0.0",
+		"dotenv": "^8.1.0",
+		"jsonwebtoken": "^8.5.1",
+		"koa": "^2.8.1",
+		"koa-bodyparser": "^4.2.1",
+		"koa-helmet": "^5.1.0",
+		"koa-router": "^7.4.0",
+		"mongoose": "^5.6.11",
+		"node-fetch": "^2.6.0"
+	},
+	"devDependencies": {
+		"nodemon": "^1.19.1"
+	}
+}
