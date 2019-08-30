@@ -9,6 +9,15 @@ describe("POST /api/v1/auth/signup", () => {
 				expect(res.status).toBe(422);
 			});
 	});
+
+	it("with email and password should NOT return 422 'Unprocessible Entity'", () => {
+		return request(app)
+			.post("/api/v1/auth/signup")
+			.send({ email: "piosik@example.com", password: "1234" })
+			.expect((res: Response) => {
+				expect(res.status).not.toBe(422);
+			});
+	});
 });
 
 describe("POST /api/v1/auth/login", () => {

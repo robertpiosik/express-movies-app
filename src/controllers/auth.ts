@@ -5,10 +5,16 @@ export const signup = async (
 	res: Response,
 	next: NextFunction
 ) => {
-	const {email, password} = req.body;
+	const { email, password } = req.body;
 
-	if(!email || password) {}
-
+	if (!email || !password) {
+		return next({
+			status: 422,
+			name: "MissingAuthData",
+			message: "Email or password is missing"
+		});
+	}
+	res.sendStatus(200);
 };
 
 export const login = async (
@@ -25,5 +31,5 @@ export const login = async (
 			message: "Email or password is missing."
 		});
 	}
-
+	res.sendStatus(200);
 };
