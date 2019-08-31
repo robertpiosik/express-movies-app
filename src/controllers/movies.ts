@@ -12,5 +12,14 @@ export const postMovies = (req: Request, res: Response, next: NextFunction) => {
 			message: "Authorization header was not found."
 		});
 	}
-	res.send(200)
+
+	const { title } = req.body;
+	if (!title) {
+		return next({
+			status: 422,
+			name: "MissingTitle",
+			message: "Title is missing."
+		});
+	}
+	res.send(200);
 };
