@@ -1,7 +1,10 @@
 require("dotenv").config();
-import jwt from "jsonwebtoken";
 import request, { Response } from "supertest";
+import jwt from "jsonwebtoken";
+import mockingoose from "mockingoose";
+
 import app from "../app";
+import Movie from "../models/movie";
 
 describe("GET /api/v1/movies", () => {
 	it("should return 200", () => {
@@ -53,6 +56,28 @@ describe("POST /api/v1/movies", () => {
 			.send({ title: "Zażółć gęślą jaźń" })
 			.expect((res: Response) => {
 				expect(res.status).toBe(404);
+			});
+	});
+
+	it("should return 409 if title is already in APP database", async () => {
+		const token = await jwt.sign({ id: "123" }, process.env.JWT_PRIVATE_KEY);
+
+		const _doc = {
+			title: "Interstellar"
+		};
+
+		const mockFinder = (query: any) => {
+			if (query.getQuery().title === "Interstellar") return _doc;
+		};
+
+		mockingoose(Movie).toReturn(mockFinder, "findOne");
+
+		return request(app)
+			.post("/api/v1/movies")
+			.set("Authorization", `Bearer ${token}`)
+			.send({ title: "Interstellar" })
+			.expect((res: Response) => {
+				expect(res.status).toBe(409);
 			});
 	});
 });
