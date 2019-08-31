@@ -60,6 +60,12 @@ export const login = async (
 		});
 	}
 
+	const user = User.findOne({email});
+	if(user) {
+
+	} else {
+		// next({status:404,})
+	}
 
 	
 };
