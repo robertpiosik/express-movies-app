@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-export interface MovieDocument extends Document {
+interface MovieDocument extends Document {
 	title: string;
 	details: {
 		year: string;
@@ -29,7 +29,7 @@ export interface MovieDocument extends Document {
 		website: string;
 	};
 	comments: Array<string>;
-};
+}
 
 const movieSchema: Schema = new Schema(
 	{
@@ -72,4 +72,4 @@ const movieSchema: Schema = new Schema(
 	{ timestamps: true }
 );
 
-export const Movie = mongoose.model<MovieDocument>("Movie", movieSchema);
+export default mongoose.model<MovieDocument>("Movie", movieSchema);

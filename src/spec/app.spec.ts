@@ -13,6 +13,8 @@ describe("GET /", () => {
 	it("should return 404", () => {
 		return request(app)
 			.get("/random-url")
-			.expect((res: Response) => {expect(res.status).toBe(404)});
+			.expect((res: Response) => {
+				expect(res.status).toBe(404);
+			});
 	});
 });
