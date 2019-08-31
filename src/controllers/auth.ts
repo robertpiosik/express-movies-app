@@ -45,17 +45,16 @@ export const signup = async (
 				password: hashedPassword
 			});
 			await newUser.save();
-			next({
-				status: 201,
+			res.status(201).json({
 				name: "Success",
 				message: "User account registered successfully.",
-				data: {id: newUser._id.toString()}
+				data: { id: newUser._id.toString() }
 			});
 		} else {
 			next({
 				status: 422,
 				name: "AlreadyRegistered",
-				message: "Account with this e-mail address is already registered."
+				message: "This e-mail address is already registered."
 			});
 		}
 	} catch (error) {

@@ -60,7 +60,7 @@ app.use((error: ErrorRequestHandler, req: Request, res: Response, next: NextFunc
 	const name = error.name || "ServerError";
 	const message = error.message || "";
 	const data = error.data;
-	res.status(status).json({ status, name, message, data });
+	res.status(status).json({ name, message, data });
 });
 
 export default app;
