@@ -62,6 +62,27 @@ export const login = async (
 
 	const user = await User.findOne({ email });
 	if (user) {
+		if (await bcrypt.compare(password, user.password)) {
+			const token = await jwt.sign(
+				{ id: user._id },
+				process.env.JWT_PRIVATE_KEY,
+				{ expiresIn: "2d" }
+			);
+			const expiresAt = Date.now() / 1000 + 172800;
+			res.status(200).json({
+				name: "Success",
+				data: {
+					token,
+					expiresAt
+				}
+			});
+		} else {
+			return next({
+				status: 401,
+				name: "PasswordMismatch",
+				message: "Provided password is incorrect."
+			});
+		}
 	} else {
 		return next({
 			status: 404,

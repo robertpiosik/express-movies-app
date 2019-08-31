@@ -82,4 +82,23 @@ describe("POST /api/v1/auth/login", () => {
 				expect(res.body.data.expiresAt).toBeDefined;
 			});
 	});
+
+	it("should return 401 if password mismatch", async () => {
+		const password = "12345678";
+		const hashedPassword = await bcrypt.hash(password, 10);
+		const _doc = {
+			_id: "5d69b6110c88517530d0b246",
+			email: "piosik@netguru.com",
+			password: hashedPassword
+		};
+
+		mockingoose(User).toReturn(_doc, "findOne");
+
+		return request(app)
+			.post("/api/v1/auth/login")
+			.send({ email: "piosik@netguru.com", password: "87654321" })
+			.expect((res: Response) => {
+				expect(res.status).toBe(401);
+			});
+	});
 });
