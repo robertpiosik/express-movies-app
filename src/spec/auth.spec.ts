@@ -53,23 +53,21 @@ describe("POST /api/v1/auth/signup", () => {
 	});
 
 	it("should return 201 and id on successful registration", async () => {
-		const password = '12345678';
-		const hashedPassword = await bcrypt.hash(password, 10);
 		const _doc = {
 			_id: "5d69b6110c88517530d0b246",
-			email: "piosik@netguru.com",
-			password: hashedPassword
+			email: "",
+			password: ""
 		};
 
-		mockingoose(User).toReturn(null, 'findOne');
-		mockingoose(User).toReturn(_doc, 'save');
+		mockingoose(User).toReturn(null, "findOne");
+		mockingoose(User).toReturn(_doc, "save");
 
 		return request(app)
 			.post("/api/v1/auth/signup")
 			.send({ email: "piosik@netguru.com", password: "12345678" })
 			.expect((res: Response) => {
 				expect(res.status).toBe(201);
-				expect(res.body.data.id).toBeDefined();
+				expect(res.body.data.id).toBe("5d69b6110c88517530d0b246");
 			});
 	});
 });
