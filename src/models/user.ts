@@ -3,7 +3,8 @@ import mongoose, { Schema, Document } from "mongoose";
 interface UserDocument extends Document {
 	email: string;
 	password: string;
-};
+	comments: Array<string>;
+}
 
 const userSchema: Schema = new Schema(
 	{
@@ -15,7 +16,8 @@ const userSchema: Schema = new Schema(
 		password: {
 			type: String,
 			required: true
-		}
+		},
+		comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }]
 	},
 	{ timestamps: true }
 );
