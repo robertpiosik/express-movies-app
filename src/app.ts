@@ -2,19 +2,20 @@ import express, {
 	Application,
 	Request,
 	Response,
-	ErrorRequestHandler
+	ErrorRequestHandler,
+	NextFunction
 } from "express";
 import helmet from "helmet";
 import cors from "cors";
 import responseTime from "response-time";
 // import graphqlHttp from "express-graphql";
 
-import checkAuth from "./middleware/check-auth";
+import checkAuth from "./middleware/is-auth";
 // import graphqlSchema from "./graphql/schema";
 // import graphqlResolvers from "./graphql/resolvers";
 
 import authRoutes from "./routes/auth";
-import { NextFunction } from "connect";
+import moviesRoutes from "./routes/movies"
 
 const app: Application = express();
 
@@ -33,6 +34,7 @@ app.use(checkAuth);
 
 // REST routes
 app.use("/api/v1", authRoutes);
+app.use("/api/v1", moviesRoutes);
 
 // graphQL route
 // app.use(
