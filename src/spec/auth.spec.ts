@@ -38,12 +38,12 @@ describe("POST /api/v1/auth/login", () => {
 			});
 	});
 
-	it("with email and password should NOT return 422 'Unprocessable Entity'", () => {
+	it("should return 422 if email is invalid", () => {
 		return request(app)
 			.post("/api/v1/auth/login")
-			.send({ email: "piosik@netguru.com", password: "1234" })
+			.send({ email: "piosiknetguru.com", password: "12345678" })
 			.expect((res: Response) => {
-				expect(res.status).not.toBe(422);
+				expect(res.status).toBe(422);
 			});
 	});
 });

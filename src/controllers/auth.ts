@@ -76,6 +76,15 @@ export const login = async (
 			message: "Email or password is missing."
 		});
 	}
+
+	if (!validator.isEmail(email)) {
+		return next({
+			status: 422,
+			name: "InvalidEmail",
+			message: "Email is invalid."
+		});
+	}
+
 	try {
 		const user = await User.findOne({ email });
 		if (user) {
