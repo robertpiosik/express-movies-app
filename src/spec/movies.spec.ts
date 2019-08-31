@@ -1,9 +1,7 @@
 require("dotenv").config();
-import request, { Response } from "supertest";
-import mockingoose from "mockingoose";
 import jwt from "jsonwebtoken";
+import request, { Response } from "supertest";
 import app from "../app";
-import User from "../models/user";
 
 describe("GET /api/v1/movies", () => {
 	it("should return 200", () => {
@@ -43,6 +41,18 @@ describe("POST /api/v1/movies", () => {
 			.set("Authorization", `Bearer ${token}`)
 			.expect((res: Response) => {
 				expect(res.status).toBe(422);
+			});
+	});
+
+	it("should return 404 if no movie was found for given title in external database", async () => {
+		const token = await jwt.sign({ id: "123" }, process.env.JWT_PRIVATE_KEY);
+
+		return request(app)
+			.post("/api/v1/movies")
+			.set("Authorization", `Bearer ${token}`)
+			.send({ title: "Zażółć gęślą jaźń" })
+			.expect((res: Response) => {
+				expect(res.status).toBe(404);
 			});
 	});
 });

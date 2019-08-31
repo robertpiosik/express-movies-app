@@ -8,6 +8,7 @@ declare global {
 			PORT: string;
 			DATABASE_CONNECTION: string;
 			JWT_PRIVATE_KEY: string;
+			OMDB_API_KEY: string;
 		}
 	}
 }
