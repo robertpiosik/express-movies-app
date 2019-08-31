@@ -26,9 +26,29 @@ describe("POST /api/v1/auth/signup", () => {
 	it("should return 422 on password which is less than 8 characters long", () => {
 		return request(app)
 			.post("/api/v1/auth/signup")
-			.send({ email: "piosik@nerguru.com", password: "1234" })
+			.send({ email: "piosik@netguru.com", password: "1234" })
 			.expect((res: Response) => {
 				expect(res.status).toBe(422);
+			});
+	});
+
+	it("should return 400 if email is already registered", async () => {
+		const _doc = {
+			id: "5d69b6110c88517530d0b246",
+			email: "piosik@netguru.com",
+			password: ""
+		};
+		const finderMock = (query: any) => {
+			if (query.getQuery().email === _doc.email) return _doc;
+		};
+
+		mockingoose(User).toReturn(finderMock, "findOne");
+
+		return request(app)
+			.post("/api/v1/auth/signup")
+			.send({ email: "piosik@netguru.com", password: "12345678" })
+			.expect((res: Response) => {
+				expect(res.status).toBe(400);
 			});
 	});
 });

@@ -35,6 +35,9 @@ export const signup = async (
 			message: "Provided password is too short."
 		});
 	}
+
+	// const user = await Use
+
 };
 
 export const login = async (
