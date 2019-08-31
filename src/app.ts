@@ -10,7 +10,7 @@ import cors from "cors";
 import responseTime from "response-time";
 // import graphqlHttp from "express-graphql";
 
-import checkAuth from "./middleware/is-auth";
+import checkAuth from "./middleware/check-auth";
 // import graphqlSchema from "./graphql/schema";
 // import graphqlResolvers from "./graphql/resolvers";
 

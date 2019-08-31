@@ -1,9 +1,9 @@
 import { Router } from "express";
 const router = Router();
 
-import isAuth from "../middleware/is-auth";
+import checkAuth from "../middleware/check-auth";
 import * as moviesController from "../controllers/movies";
 
-router.post("/movies", isAuth, moviesController.postMovies);
+router.post("/movies", checkAuth, moviesController.postMovies);
 
 export default router;
