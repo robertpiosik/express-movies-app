@@ -5,10 +5,8 @@ This is a basic movie REST API application written in TypeScript. Backend utiliz
 Features:
 
 - user authentication via JSON Web Tokens,
-- submiting movies with rich details autocompletion thanks to external movie API,
-- posting comments,
-- getting all movies,
-- getting movie by title with associated comments.
+- submiting movies with rich details autocompletion thanks to external movie API and comments,
+- getting movies and comments.
 
 ## REST API Reference
 
