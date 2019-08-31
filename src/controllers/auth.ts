@@ -36,8 +36,15 @@ export const signup = async (
 		});
 	}
 
-	// const user = await Use
-
+	const user = await User.findOne({ email });
+	if (!user) {
+	} else {
+		next({
+			status: 400,
+			name: "AlreadyRegistered",
+			message: "Provided e-mail is alrady registered. Please Log In."
+		});
+	}
 };
 
 export const login = async (
