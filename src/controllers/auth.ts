@@ -60,12 +60,13 @@ export const login = async (
 		});
 	}
 
-	const user = User.findOne({email});
-	if(user) {
-
+	const user = await User.findOne({ email });
+	if (user) {
 	} else {
-		// next({status:404,})
+		return next({
+			status: 404,
+			name: "UserNotFound",
+			message: "Provided e-mail is not registered yet."
+		});
 	}
-
-	
 };

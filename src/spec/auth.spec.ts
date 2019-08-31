@@ -33,7 +33,7 @@ describe("POST /api/v1/auth/signup", () => {
 	});
 });
 
-describe("POST /api/v1/auth/login", async () => {
+describe("POST /api/v1/auth/login", () => {
 	it("without email or password should return 422 'Unprocessable Entity'", () => {
 		return request(app)
 			.post("/api/v1/auth/login")
@@ -51,17 +51,9 @@ describe("POST /api/v1/auth/login", async () => {
 			});
 	});
 
-	const password = "12345678";
-	const hashedPassword = await bcrypt.hash(password, 10);
-	const _doc = {
-		_id: "5d69b6590c88517530d0b247",
-		email: "piosik@netguru.com",
-		password: hashedPassword
-	};
-
-	mockingoose(User).toReturn(_doc, "findOne");
-
 	it("should return 404 if email is not registered", () => {
+		mockingoose(User).toReturn(null, "findOne");
+
 		return request(app)
 			.post("/api/v1/auth/login")
 			.send({ email: "notregistered@netguru.com", password: "12345678" })
@@ -70,12 +62,24 @@ describe("POST /api/v1/auth/login", async () => {
 			});
 	});
 
-	// it("should return token & expiresAt on successful login", async () => {
-	// 	return request(app)
-	// 		.post("/api/v1/auth/login")
-	// 		.send({ email: "piosik@netguru.com", password: "12345678" })
-	// 		.expect((res: Response) => {
-	// 			expect(res.body.data.token).not.toBeUndefined;
-	// 		});
-	// });
+	it("should return token and expiresAt on successful authentication", async () => {
+		const password = "12345678";
+		const hashedPassword = await bcrypt.hash(password, 10);
+		const _doc = {
+			_id: "5d69b6110c88517530d0b246",
+			email: "piosik@netguru.com",
+			password: hashedPassword
+		};
+
+		mockingoose(User).toReturn(_doc, "findOne");
+
+		return request(app)
+			.post("/api/v1/auth/login")
+			.send({ email: "piosik@netguru.com", password: "12345678" })
+			.expect((res: Response) => {
+				expect(res.status).toBe(200);
+				expect(res.body.data.token).toBeDefined;
+				expect(res.body.data.expiresAt).toBeDefined;
+			});
+	});
 });
