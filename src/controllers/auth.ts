@@ -38,11 +38,23 @@ export const signup = async (
 
 	const user = await User.findOne({ email });
 	if (!user) {
+		const hashedPassword = await bcrypt.hash(password, 10);
+		const newUser = await new User({
+			email,
+			password: hashedPassword
+		}).save();
+		res
+			.status(201)
+			.json({
+				name: "Success",
+				message: "User registered successfully.",
+				data: { id: newUser._id.toString() }
+			});
 	} else {
 		next({
 			status: 400,
 			name: "AlreadyRegistered",
-			message: "Provided e-mail is alrady registered. Please Log In."
+			message: "Email already registered."
 		});
 	}
 };
