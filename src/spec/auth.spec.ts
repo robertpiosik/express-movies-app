@@ -62,7 +62,7 @@ describe("POST /api/v1/auth/login", () => {
 			});
 	});
 
-	it("should return token and expiresAt on successful authentication", async () => {
+	it("should return 200, token and expiresAt on successful authentication", async () => {
 		const password = "12345678";
 		const hashedPassword = await bcrypt.hash(password, 10);
 		const _doc = {
@@ -71,7 +71,11 @@ describe("POST /api/v1/auth/login", () => {
 			password: hashedPassword
 		};
 
-		mockingoose(User).toReturn(_doc, "findOne");
+		const finderMock = (query: any) => {
+			if (query.getQuery().email === _doc.email) return _doc;
+		};
+
+		mockingoose(User).toReturn(finderMock, "findOne");
 
 		return request(app)
 			.post("/api/v1/auth/login")
@@ -92,7 +96,11 @@ describe("POST /api/v1/auth/login", () => {
 			password: hashedPassword
 		};
 
-		mockingoose(User).toReturn(_doc, "findOne");
+		const finderMock = (query: any) => {
+			if (query.getQuery().email === _doc.email) return _doc;
+		};
+
+		mockingoose(User).toReturn(finderMock, "findOne");
 
 		return request(app)
 			.post("/api/v1/auth/login")
