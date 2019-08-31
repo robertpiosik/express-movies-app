@@ -3,7 +3,7 @@ import validator from "validator";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-import { User, UserDocument } from "../models/user";
+import { User } from "../models/user";
 
 export const signup = async (
 	req: Request,
@@ -76,7 +76,36 @@ export const login = async (
 			message: "Email or password is missing."
 		});
 	}
-	// find user
-	// return user not found or generate jwt
-	// return auth data
+	try {
+		const user = await User.findOne({ email });
+		if (user) {
+			if (await bcrypt.compare(password, user.password)) {
+				const token = await jwt.sign(
+					{ id: user._id.toString() },
+					process.env.JWT_PRIVATE_KEY,
+					{ expiresIn: "2d" }
+				);
+				const expiresAt = Math.floor(Date.now() / 1000) + 172800;
+				res.status(200).json({
+					name: "Success",
+					message: "User authenticated successfully.",
+					data: { token, expiresAt }
+				});
+			} else {
+				next({
+					status: 403,
+					name: "UserNotAuthenticated",
+					message: "Provided password is incorrect."
+				});
+			}
+		} else {
+			next({
+				status: 404,
+				name: "UserNotFound",
+				message: "User with this e-mail address was not found."
+			});
+		}
+	} catch (error) {
+		next({ data: error });
+	}
 };
