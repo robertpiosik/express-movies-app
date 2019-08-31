@@ -68,9 +68,10 @@ export const login = async (
 				process.env.JWT_PRIVATE_KEY,
 				{ expiresIn: "2d" }
 			);
-			const expiresAt = Date.now() / 1000 + 172800;
+			const expiresAt = Math.floor(Date.now() / 1000 + 172800);
 			res.status(200).json({
 				name: "Success",
+				message: "User authenticated successfully.",
 				data: {
 					token,
 					expiresAt
