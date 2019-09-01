@@ -42,7 +42,7 @@ export const postMovies = async (
 			return next({
 				status: 404,
 				name: "MovieNotFound",
-				message: "Movie was not found."
+				message: `OMDb doesn't have "${title}". Try with another one.`
 			});
 		}
 
@@ -62,7 +62,7 @@ export const postMovies = async (
 				creator.save();
 			}
 
-			return res.status(201).json({
+			res.status(201).json({
 				name: "Success",
 				message: "Movie has been added successfully.",
 				data: newMovie
