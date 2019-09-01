@@ -17,6 +17,6 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 		next();
 	} catch (err) {
 		req.isAuth = false;
-		return next();
+		next();
 	}
 };

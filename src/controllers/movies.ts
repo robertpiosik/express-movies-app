@@ -16,7 +16,7 @@ export const postMovies = async (
 		return next({
 			status: 401,
 			name: "NotAuthorized",
-			message: "Authorization header was not found."
+			message: "You are not authorized."
 		});
 	}
 
@@ -50,7 +50,7 @@ export const postMovies = async (
 			const newMovie = await new Movie({
 				title: movieData.Title,
 				creator: req.userId,
-				fetchedData: {
+				fetchedMovieData: {
 					...movieData
 				}
 			}).save();
@@ -64,7 +64,7 @@ export const postMovies = async (
 			next({
 				status: 409,
 				name: "AlreadyExists",
-				message: "Given movie already exists."
+				message: "Movie already exists in the database."
 			});
 		}
 	} catch (error) {

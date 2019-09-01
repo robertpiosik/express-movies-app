@@ -5,6 +5,7 @@ import mockingoose from "mockingoose";
 
 import app from "../app";
 import Movie from "../models/movie";
+import User from "../models/user";
 
 describe("GET /api/v1/movies", () => {
 	it("should return 200", () => {
@@ -105,4 +106,9 @@ describe("POST /api/v1/movies", () => {
 				expect(res.body.data.fetchedMovieData.Title).toBe("Interstellar");
 			});
 	});
+
+	// it("should store movie id in the user document", () => {
+	// 	const user_doc = 
+
+	// });
 });
