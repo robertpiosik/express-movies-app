@@ -41,18 +41,30 @@ export const postMovies = async (
 			return next({
 				status: 404,
 				name: "MovieNotFound",
-				message: "Movie in external database was not found."
+				message: "Movie was not found in external database."
 			});
 		}
 
 		const movie = await Movie.findOne({ title });
 		if (!movie) {
-			// add movie
+			const newMovie = await new Movie({
+				title: movieData.Title,
+				creator: req.userId,
+				fetchedData: {
+					...movieData
+				}
+			}).save();
+
+			return res.status(201).json({
+				name: "Success",
+				message: "Movie saved into database successfully.",
+				data: newMovie
+			});
 		} else {
 			next({
 				status: 409,
 				name: "AlreadyExists",
-				message: "Given movie is already in the App database."
+				message: "Given movie already exists."
 			});
 		}
 	} catch (error) {

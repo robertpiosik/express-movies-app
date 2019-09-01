@@ -80,4 +80,29 @@ describe("POST /api/v1/movies", () => {
 				expect(res.status).toBe(409);
 			});
 	});
+
+	it("should return 201 and document in res.body.data on success", async () => {
+		const token = await jwt.sign(
+			{ userId: "5d69b6110c88517530d0b246" },
+			process.env.JWT_PRIVATE_KEY
+		);
+
+		const _doc = {
+			fetchedMovieData: {
+				Title: "Interstellar"
+			}
+		};
+
+		mockingoose(Movie).toReturn(null, "findOne");
+		mockingoose(Movie).toReturn(_doc, "save");
+
+		return request(app)
+			.post("/api/v1/movies")
+			.set("Authorization", `Bearer ${token}`)
+			.send({ title: "Interstellar" })
+			.expect((res: Response) => {
+				expect(res.status).toBe(201);
+				expect(res.body.data.fetchedMovieData.Title).toBe("Interstellar");
+			});
+	});
 });
