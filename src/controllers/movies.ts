@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import fetch from "node-fetch";
 
 import Movie from "../models/movie";
+import User from "../models/user";
 
 export const getMovies = (req: Request, res: Response, next: NextFunction) => {
 	res.sendStatus(200);
@@ -41,7 +42,7 @@ export const postMovies = async (
 			return next({
 				status: 404,
 				name: "MovieNotFound",
-				message: "Movie was not found in external database."
+				message: "Movie was not found."
 			});
 		}
 
@@ -55,16 +56,22 @@ export const postMovies = async (
 				}
 			}).save();
 
+			const creator = await User.findById(req.userId);
+			if (creator) {
+				creator.movies.push(newMovie._id);
+				creator.save();
+			}
+
 			return res.status(201).json({
 				name: "Success",
-				message: "Movie saved into database successfully.",
+				message: "Movie has been added successfully.",
 				data: newMovie
 			});
 		} else {
 			next({
 				status: 409,
 				name: "AlreadyExists",
-				message: "Movie already exists in the database."
+				message: "Movie already exists."
 			});
 		}
 	} catch (error) {
