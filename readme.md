@@ -31,7 +31,11 @@ JWT_PRIVATE_KEY="randomstring"
 OMDB_API_KEY=""
 ```
 
-* Make sure you have Node.js installedm, build source code and run server
+* Run tests
+
+`npm run test`
+
+* Make sure you have Node.js installed, build from source and run a server
 
 `npm run build && npm start`
 

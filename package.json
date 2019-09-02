@@ -1,7 +1,7 @@
 {
 	"name": "netguru-movies",
 	"author": "Robert Piosik",
-	"description": "A simple Node.js express movie app written with TypeScript.",
+	"description": "A simple Node.js express app written with TypeScript.",
 	"private": true,
 	"engines": {
 		"node": "10.16.1"
