@@ -106,9 +106,14 @@ describe("POST /api/v1/movies", () => {
 				expect(res.body.data.fetchedMovieData.Title).toBe("Interstellar");
 			});
 	});
+});
 
-	// it("should store movie id in the user document", () => {
-	// 	const user_doc = 
-
-	// });
+describe("GET /api/v1/movies", () => {
+	it("should return 200", () => {
+		return request(app)
+			.get("/api/v1/movies")
+			.expect((res: Response) => {
+				expect(res.status).toBe(200);
+			});
+	});
 });
