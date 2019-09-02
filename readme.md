@@ -73,57 +73,57 @@ _Authenticate yourself with Bearer Token._
 
 ```json
 {
-	"name": "Success",
-	"message": "Movie has been added successfully.",
-	"data": {
-		"comments": [],
-		"_id": "5d6b8de7e9087b29d7c088a4",
-		"title": "Interstellar",
-		"creator": "5d69b8e95a5bf5782bbd61db",
-		"fetchedMovieData": {
-			"Title": "Interstellar",
-			"Year": "2014",
-			"Rated": "PG-13",
-			"Released": "07 Nov 2014",
-			"Runtime": "169 min",
-			"Genre": "Adventure, Drama, Sci-Fi",
-			"Director": "Christopher Nolan",
-			"Writer": "Jonathan Nolan, Christopher Nolan",
-			"Actors": "Ellen Burstyn, Matthew McConaughey, Mackenzie Foy, John Lithgow",
-			"Plot": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
-			"Language": "English",
-			"Country": "USA, UK, Canada",
-			"Awards": "Won 1 Oscar. Another 43 wins & 143 nominations.",
-			"Poster": "https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
-			"Ratings": [
-				{
-					"Source": "Internet Movie Database",
-					"Value": "8.6/10"
-				},
-				{
-					"Source": "Rotten Tomatoes",
-					"Value": "72%"
-				},
-				{
-					"Source": "Metacritic",
-					"Value": "74/100"
-				}
-			],
-			"Metascore": "74",
-			"imdbRating": "8.6",
-			"imdbVotes": "1,323,520",
-			"imdbID": "tt0816692",
-			"Type": "movie",
-			"DVD": "31 Mar 2015",
-			"BoxOffice": "$158,737,441",
-			"Production": "Paramount Pictures",
-			"Website": "http://www.InterstellarMovie.com/",
-			"Response": "True"
-		},
-		"createdAt": "2019-09-01T09:22:47.082Z",
-		"updatedAt": "2019-09-01T09:22:47.082Z",
-		"__v": 0
-	}
+  "name": "Success",
+  "message": "Movie has been added successfully.",
+  "data": {
+    "comments": [],
+    "_id": "5d6b8de7e9087b29d7c088a4",
+    "title": "Interstellar",
+    "creator": "5d69b8e95a5bf5782bbd61db",
+    "fetchedMovieData": {
+      "Title": "Interstellar",
+      "Year": "2014",
+      "Rated": "PG-13",
+      "Released": "07 Nov 2014",
+      "Runtime": "169 min",
+      "Genre": "Adventure, Drama, Sci-Fi",
+      "Director": "Christopher Nolan",
+      "Writer": "Jonathan Nolan, Christopher Nolan",
+      "Actors": "Ellen Burstyn, Matthew McConaughey, Mackenzie Foy, John Lithgow",
+      "Plot": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+      "Language": "English",
+      "Country": "USA, UK, Canada",
+      "Awards": "Won 1 Oscar. Another 43 wins & 143 nominations.",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
+      "Ratings": [
+        {
+          "Source": "Internet Movie Database",
+          "Value": "8.6/10"
+        },
+        {
+          "Source": "Rotten Tomatoes",
+          "Value": "72%"
+        },
+        {
+          "Source": "Metacritic",
+          "Value": "74/100"
+        }
+      ],
+      "Metascore": "74",
+      "imdbRating": "8.6",
+      "imdbVotes": "1,323,520",
+      "imdbID": "tt0816692",
+      "Type": "movie",
+      "DVD": "31 Mar 2015",
+      "BoxOffice": "$158,737,441",
+      "Production": "Paramount Pictures",
+      "Website": "http://www.InterstellarMovie.com/",
+      "Response": "True"
+    },
+    "createdAt": "2019-09-01T09:22:47.082Z",
+    "updatedAt": "2019-09-01T09:22:47.082Z",
+    "__v": 0
+  }
 }
 ```
 
@@ -138,40 +138,46 @@ _Authenticate yourself with Bearer Token._
 
 ```json
 {
-    "name": "Success",
-    "data": {
-        "total": 7,
-        "movies": [
-            {
-                "comments": [],
-                "_id": "5d6cdaa67d47610e1144ba3f",
-                "title": "Green Book",
-                "creator": "5d69b8e95a5bf5782bbd61db",
-                "fetchedMovieData": {
-                    "Title": "Green Book",
-                    "Year": "2018",
-                    ...
-                },
-                "createdAt": "2019-09-02T09:02:30.937Z",
-                "updatedAt": "2019-09-02T09:02:30.937Z",
-                "__v": 0
+  "name": "Success",
+  "data": {
+    "total": 7,
+    "movies": [
+      {
+        "comments": [
+          {
+            "_id": "5d6d1705aa33b22dce57f872",
+            "creator": {
+              "_id": "5d69b8e95a5bf5782bbd61db",
+              "email": "piosik@netguru.com"
             },
-            {
-                "comments": [],
-                "_id": "5d6cdac07d47610e1144ba40",
-                "title": "Ran",
-                "creator": "5d69b8e95a5bf5782bbd61db",
-                "fetchedMovieData": {
-                    "Title": "Ran",
-                    "Year": "1985",
-                    ...
-                },
-                "createdAt": "2019-09-02T09:02:56.201Z",
-                "updatedAt": "2019-09-02T09:02:56.201Z",
-                "__v": 0
-            }
-        ]
-    }
+            "content": "Lorem ipsum.",
+            "createdAt": "2019-09-02T13:20:05.387Z",
+            "updatedAt": "2019-09-02T13:20:05.387Z"
+          },
+          {
+            "_id": "5d6d1733aa33b22dce57f873",
+            "creator": {
+              "_id": "5d69b8e95a5bf5782bbd61db",
+              "email": "piosik@netguru.com"
+            },
+            "content": "Lorem ipsum.",
+            "createdAt": "2019-09-02T13:20:51.815Z",
+            "updatedAt": "2019-09-02T13:20:51.815Z"
+          }
+        ],
+        "_id": "5d6cdaa67d47610e1144ba3f",
+        "title": "Green Book",
+        "creator": "5d69b8e95a5bf5782bbd61db",
+        "fetchedMovieData": {
+          "Title": "Green Book",
+          "Year": "2018"
+        },
+        "createdAt": "2019-09-02T09:02:30.937Z",
+        "updatedAt": "2019-09-02T09:02:30.937Z",
+        "__v": 0
+      }
+    ]
+  }
 }
 ```
 
@@ -192,16 +198,16 @@ _Authenticate yourself with Bearer Token._
 
 ```json
 {
-    "name": "Success",
-    "data": {
-        "_id": "5d6d1e9755fb1c3315d854bf",
-        "creator": "5d69b8e95a5bf5782bbd61db",
-        "movieId": "5d6b8de7e9087b29d7c088a4",
-        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "createdAt": "2019-09-02T13:52:23.259Z",
-        "updatedAt": "2019-09-02T13:52:23.259Z",
-        "__v": 0
-    }
+	"name": "Success",
+	"data": {
+		"_id": "5d6d1e9755fb1c3315d854bf",
+		"creator": "5d69b8e95a5bf5782bbd61db",
+		"movieId": "5d6b8de7e9087b29d7c088a4",
+		"content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+		"createdAt": "2019-09-02T13:52:23.259Z",
+		"updatedAt": "2019-09-02T13:52:23.259Z",
+		"__v": 0
+	}
 }
 ```
 
@@ -216,29 +222,29 @@ _Authenticate yourself with Bearer Token._
 
 ```json
 {
-    "name": "Success",
-    "data": {
-        "total": 25,
-        "comments": [
-            {
-                "_id": "5d6d140cb42f6e2bc58767c3",
-                "creator": "5d69b8e95a5bf5782bbd61db",
-                "movieId": "5d6b8de7e9087b29d7c088a4",
-                "content": "Lorem ipsum.",
-                "createdAt": "2019-09-02T13:07:24.186Z",
-                "updatedAt": "2019-09-02T13:07:24.186Z",
-                "__v": 0
-            },
-            {
-                "_id": "5d6d1705aa33b22dce57f872",
-                "creator": "5d69b8e95a5bf5782bbd61db",
-                "movieId": "5d6b8de7e9087b29d7c088a4",
-                "content": "Lorem ipsum.",
-                "createdAt": "2019-09-02T13:20:05.387Z",
-                "updatedAt": "2019-09-02T13:20:05.387Z",
-                "__v": 0
-            }
-        ]
-    }
+	"name": "Success",
+	"data": {
+		"total": 25,
+		"comments": [
+			{
+				"_id": "5d6d140cb42f6e2bc58767c3",
+				"creator": "5d69b8e95a5bf5782bbd61db",
+				"movieId": "5d6b8de7e9087b29d7c088a4",
+				"content": "Lorem ipsum.",
+				"createdAt": "2019-09-02T13:07:24.186Z",
+				"updatedAt": "2019-09-02T13:07:24.186Z",
+				"__v": 0
+			},
+			{
+				"_id": "5d6d1705aa33b22dce57f872",
+				"creator": "5d69b8e95a5bf5782bbd61db",
+				"movieId": "5d6b8de7e9087b29d7c088a4",
+				"content": "Lorem ipsum.",
+				"createdAt": "2019-09-02T13:20:05.387Z",
+				"updatedAt": "2019-09-02T13:20:05.387Z",
+				"__v": 0
+			}
+		]
+	}
 }
 ```

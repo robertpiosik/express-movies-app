@@ -15,7 +15,16 @@ export const getMovies = async (
 		const total = await Movie.countDocuments();
 		const movies = await Movie.find()
 			.skip((page - 1) * perPage)
-			.limit(perPage);
+			.limit(perPage)
+			.populate({
+				path: "creator",
+				select: "email"
+			})
+			.populate({
+				path: "comments",
+				select: "content createdAt updatedAt",
+				populate: {path: "creator", select: "email"}
+			})
 		res.status(200).json({ name: "Success", data: { total, movies } });
 	} catch (error) {
 		next({ data: error });
