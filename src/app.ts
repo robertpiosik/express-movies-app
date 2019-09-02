@@ -8,11 +8,8 @@ import express, {
 import helmet from "helmet";
 import cors from "cors";
 import responseTime from "response-time";
-// import graphqlHttp from "express-graphql";
 
 import checkAuth from "./middleware/check-auth";
-// import graphqlSchema from "./graphql/schema";
-// import graphqlResolvers from "./graphql/resolvers";
 
 import authRoutes from "./routes/auth";
 import moviesRoutes from "./routes/movies";
@@ -37,24 +34,6 @@ app.use(checkAuth);
 app.use("/api/v1", authRoutes);
 app.use("/api/v1", moviesRoutes);
 app.use("/api/v1", commentsRoutes);
-
-// graphQL route
-// app.use(
-// 	"/graphql",
-// 	graphqlHttp({
-// 		schema: graphqlSchema,
-// 		rootValue: graphqlResolvers,
-// 		graphiql: process.env.NODE_ENV === "development" ? true : false,
-// 		customFormatErrorFn(error) {
-// 			if (!error.originalError) return error;
-
-// 			const data = error.originalError.data;
-// 			const message = error.message || "An error occured";
-// 			const status = error.originalError.status || 500;
-// 			return { message, status, data };
-// 		}
-// 	})
-// );
 
 // prettier-ignore
 
