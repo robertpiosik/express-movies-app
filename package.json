@@ -3,9 +3,12 @@
 	"author": "Robert Piosik",
 	"description": "A simple Node.js express movie app written with TypeScript.",
 	"private": true,
+	"engines": {
+		"node": "10.16.1"
+	},
 	"scripts": {
+		"start": "node dist/index.js",
 		"build": "npx tsc",
-		"serve": "node dist/server.js",
 		"test": "npx jest",
 		"test-watch": "npx jest --watch"
 	},
