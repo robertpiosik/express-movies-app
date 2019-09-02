@@ -116,4 +116,15 @@ describe("GET /api/v1/movies", () => {
 				expect(res.status).toBe(200);
 			});
 	});
+
+	it("should return movies", () => {
+		const _doc = [{ title: "Abc" }, { title: "Def" }];
+		mockingoose(Movie).toReturn(_doc, "find");
+		return request(app)
+			.get("/api/v1/movies")
+			.expect((res: Response) => {
+				expect(res.body.data[0].title).toBe("Abc");
+				expect(res.body.data[1].title).toBe("Def");
+			});
+	});
 });

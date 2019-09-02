@@ -4,8 +4,17 @@ import fetch from "node-fetch";
 import Movie from "../models/movie";
 import User from "../models/user";
 
-export const getMovies = (req: Request, res: Response, next: NextFunction) => {
-	res.sendStatus(200);
+export const getMovies = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	try {
+		const movies = await Movie.find();
+		res.status(200).json({ name: "Success", data: movies });
+	} catch (error) {
+		next({ data: error });
+	}
 };
 
 export const postMovies = async (
@@ -71,7 +80,7 @@ export const postMovies = async (
 			next({
 				status: 409,
 				name: "AlreadyExists",
-				message: "Movie already exists."
+				message: "This movie already figure in the database."
 			});
 		}
 	} catch (error) {
