@@ -117,14 +117,16 @@ describe("GET /api/v1/movies", () => {
 			});
 	});
 
-	it("should return movies", () => {
+	it("should return movie documents and total movies", () => {
 		const _doc = [{ title: "Abc" }, { title: "Def" }];
+		mockingoose(Movie).toReturn(2, "countDocuments");
 		mockingoose(Movie).toReturn(_doc, "find");
 		return request(app)
 			.get("/api/v1/movies")
 			.expect((res: Response) => {
-				expect(res.body.data[0].title).toBe("Abc");
-				expect(res.body.data[1].title).toBe("Def");
+				expect(res.body.data.movies[0].title).toBe("Abc");
+				expect(res.body.data.movies[1].title).toBe("Def");
+				expect(res.body.data.total).toBe(2);
 			});
 	});
 });

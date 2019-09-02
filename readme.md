@@ -129,13 +129,48 @@ _Authenticate yourself with Bearer Token._
 
 **GET** `/api/v1/movies`
 
-| Parameter | Type    | Description                                                           |
-| --------- | ------- | --------------------------------------------------------------------- |
-| page      | integer | Current page of the collection. Default is `1`.                       |
-| per_page  | integer | Maximum number of items to be returned in result set. Default is `2`. |
+| Parameter | Type    | Description                                                             |
+| --------- | ------- | ----------------------------------------------------------------------- |
+| page      | integer | Current page of the collection. Default is `1`.                         |
+| per_page  | integer | Maximum number of items to be returned in a result set. Default is `2`. |
 
 > Example success response:
 
-// TODO: example success response get movies
 ```json
+{
+    "name": "Success",
+    "data": {
+        "total": 7,
+        "movies": [
+            {
+                "comments": [],
+                "_id": "5d6cdaa67d47610e1144ba3f",
+                "title": "Green Book",
+                "creator": "5d69b8e95a5bf5782bbd61db",
+                "fetchedMovieData": {
+                    "Title": "Green Book",
+                    "Year": "2018",
+                    ...
+                },
+                "createdAt": "2019-09-02T09:02:30.937Z",
+                "updatedAt": "2019-09-02T09:02:30.937Z",
+                "__v": 0
+            },
+            {
+                "comments": [],
+                "_id": "5d6cdac07d47610e1144ba40",
+                "title": "Ran",
+                "creator": "5d69b8e95a5bf5782bbd61db",
+                "fetchedMovieData": {
+                    "Title": "Ran",
+                    "Year": "1985",
+                    ...
+                },
+                "createdAt": "2019-09-02T09:02:56.201Z",
+                "updatedAt": "2019-09-02T09:02:56.201Z",
+                "__v": 0
+            }
+        ]
+    }
+}
 ```

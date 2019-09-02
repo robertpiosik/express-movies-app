@@ -9,9 +9,14 @@ export const getMovies = async (
 	res: Response,
 	next: NextFunction
 ) => {
+	const page = req.query.page || 1;
+	const perPage = parseInt(req.query.per_page) || 2;
 	try {
-		const movies = await Movie.find();
-		res.status(200).json({ name: "Success", data: movies });
+		const total = await Movie.countDocuments();
+		const movies = await Movie.find()
+			.skip((page - 1) * perPage)
+			.limit(perPage);
+		res.status(200).json({ name: "Success", data: { total, movies } });
 	} catch (error) {
 		next({ data: error });
 	}
