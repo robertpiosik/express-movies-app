@@ -5,7 +5,6 @@ import mockingoose from "mockingoose";
 
 import app from "../app";
 import Movie from "../models/movie";
-import User from "../models/user";
 
 describe("GET /api/v1/movies", () => {
 	it("should return 200", () => {

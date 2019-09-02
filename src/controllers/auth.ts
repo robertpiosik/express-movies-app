@@ -43,13 +43,11 @@ export const signup = async (
 			email,
 			password: hashedPassword
 		}).save();
-		res
-			.status(201)
-			.json({
-				name: "Success",
-				message: "User registered successfully.",
-				data: { id: newUser._id.toString() }
-			});
+		res.status(201).json({
+			name: "Success",
+			message: "User registered successfully.",
+			data: { id: newUser._id.toString() }
+		});
 	} else {
 		next({
 			status: 400,

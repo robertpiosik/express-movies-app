@@ -1,8 +1,8 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 interface CommentDocument extends Document {
-	creator: string; 
-	movieId: string
+	creator: string;
+	movieId: string;
 	content: string;
 }
 

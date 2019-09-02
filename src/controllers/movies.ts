@@ -23,8 +23,8 @@ export const getMovies = async (
 			.populate({
 				path: "comments",
 				select: "content createdAt updatedAt",
-				populate: {path: "creator", select: "email"}
-			})
+				populate: { path: "creator", select: "email" }
+			});
 		res.status(200).json({ name: "Success", data: { total, movies } });
 	} catch (error) {
 		next({ data: error });
