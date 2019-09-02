@@ -35,7 +35,7 @@ OMDB_API_KEY=""
 
 `npm run test`
 
-* Make sure you have Node.js installed, build from source and run a server
+* Build and run
 
 `npm run build && npm start`
 
