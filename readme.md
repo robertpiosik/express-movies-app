@@ -174,3 +174,33 @@ _Authenticate yourself with Bearer Token._
     }
 }
 ```
+
+**POST** `/api/v1/comments`
+
+_Authenticate yourself with Bearer Token._
+
+> Example request body:
+
+```json
+{
+	"movieId": "5d6b8de7e9087b29d7c088a4",
+	"content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+}
+```
+
+> Example success response:
+
+```json
+{
+    "name": "Success",
+    "data": {
+        "_id": "5d6d1e9755fb1c3315d854bf",
+        "creator": "5d69b8e95a5bf5782bbd61db",
+        "movieId": "5d6b8de7e9087b29d7c088a4",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "createdAt": "2019-09-02T13:52:23.259Z",
+        "updatedAt": "2019-09-02T13:52:23.259Z",
+        "__v": 0
+    }
+}
+```

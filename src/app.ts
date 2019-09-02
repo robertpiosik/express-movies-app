@@ -15,7 +15,8 @@ import checkAuth from "./middleware/check-auth";
 // import graphqlResolvers from "./graphql/resolvers";
 
 import authRoutes from "./routes/auth";
-import moviesRoutes from "./routes/movies"
+import moviesRoutes from "./routes/movies";
+import commentsRoutes from "./routes/comments";
 
 const app: Application = express();
 
@@ -35,6 +36,7 @@ app.use(checkAuth);
 // REST routes
 app.use("/api/v1", authRoutes);
 app.use("/api/v1", moviesRoutes);
+app.use("/api/v1", commentsRoutes);
 
 // graphQL route
 // app.use(

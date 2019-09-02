@@ -2,7 +2,7 @@ import mongoose, { Schema, Document } from "mongoose";
 
 interface CommentDocument extends Document {
 	creator: string; 
-	movie: string; 
+	movieId: string
 	content: string;
 }
 
@@ -13,10 +13,9 @@ const commentSchema: Schema = new Schema(
 			ref: "User",
 			required: true
 		},
-		movie: {
+		movieId: {
 			type: Schema.Types.ObjectId,
-			ref: "Movie",
-			required: true
+			ref: "Movie"
 		},
 		content: String
 	},

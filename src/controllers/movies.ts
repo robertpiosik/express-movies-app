@@ -70,7 +70,7 @@ export const postMovies = async (
 				}
 			}).save();
 
-			const creator = await User.findById(req.userId);
+			const creator = await User.findOne({ _id: req.userId });
 			if (creator) {
 				creator.movies.push(newMovie._id);
 				creator.save();
