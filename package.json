@@ -1,9 +1,11 @@
 {
 	"name": "netguru-movies",
 	"author": "Robert Piosik",
+	"description": "A simple Node.js express movie app written with TypeScript.",
 	"private": true,
 	"scripts": {
 		"build": "npx tsc",
+		"serve": "node dist/server.js",
 		"test": "npx jest",
 		"test-watch": "npx jest --watch"
 	},
