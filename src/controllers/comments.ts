@@ -56,3 +56,25 @@ export const postComments = async (
 		next({ data: error });
 	}
 };
+
+export const getComments = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	const page = req.query.page || 1;
+	const perPage = parseInt(req.query.per_page) || 2;
+	try {
+		const total = await Comment.countDocuments();
+
+		const comments = await Comment.find()
+			.skip((page - 1) * perPage)
+			.limit(perPage);
+
+		res.status(200).json({ name: "Success", data: { total, comments } });
+	} catch (error) {
+		next({
+			data: error
+		});
+	}
+};

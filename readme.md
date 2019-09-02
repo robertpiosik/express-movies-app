@@ -204,3 +204,41 @@ _Authenticate yourself with Bearer Token._
     }
 }
 ```
+
+**GET** `/api/v1/comments`
+
+| Parameter | Type    | Description                                                             |
+| --------- | ------- | ----------------------------------------------------------------------- |
+| page      | integer | Current page of the collection. Default is `1`.                         |
+| per_page  | integer | Maximum number of items to be returned in a result set. Default is `2`. |
+
+> Example success response:
+
+```json
+{
+    "name": "Success",
+    "data": {
+        "total": 25,
+        "comments": [
+            {
+                "_id": "5d6d140cb42f6e2bc58767c3",
+                "creator": "5d69b8e95a5bf5782bbd61db",
+                "movieId": "5d6b8de7e9087b29d7c088a4",
+                "content": "Lorem ipsum.",
+                "createdAt": "2019-09-02T13:07:24.186Z",
+                "updatedAt": "2019-09-02T13:07:24.186Z",
+                "__v": 0
+            },
+            {
+                "_id": "5d6d1705aa33b22dce57f872",
+                "creator": "5d69b8e95a5bf5782bbd61db",
+                "movieId": "5d6b8de7e9087b29d7c088a4",
+                "content": "Lorem ipsum.",
+                "createdAt": "2019-09-02T13:20:05.387Z",
+                "updatedAt": "2019-09-02T13:20:05.387Z",
+                "__v": 0
+            }
+        ]
+    }
+}
+```
