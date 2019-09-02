@@ -1,12 +1,39 @@
 # MOVIE APP
 
-This is a basic movie REST API application written in TypeScript. Backend utilizes MongoDB for storing movie collection, users and comments data.
+The main purpose of this repository is to show a simple Node.js express REST API application written with TypeScript. Backend utilizes MongoDB as noSQL data storage for movie collection, users and comments data.
 
 Features:
 
 - user authentication via JSON Web Tokens,
-- submiting movies with rich details autocompletion thanks to external movie API and comments,
-- getting movies and comments.
+- submiting movies by title and fetching additional data from an external API,
+- posting comments,
+- getting paginated movies and comments.
+
+## Pre-reqs
+
+* Clone the repository
+
+`git clone https://github.com/robertpiosik/netguru-movies.git`
+
+* Install dependencies
+
+`cd netguru-movies && npm i`
+
+* Configure environment variables
+
+```
+_.env_
+
+NODE_ENV="development"
+PORT="8000"
+DATABASE_CONNECTION="mongodb server connection string"
+JWT_PRIVATE_KEY="randomstring"
+OMDB_API_KEY=""
+```
+
+* Make sure you have Node.js installedm, build source code and run server
+
+`npm run build && npm start`
 
 ## REST API Reference
 
