@@ -222,29 +222,41 @@ _Authenticate yourself with Bearer Token._
 
 ```json
 {
-	"name": "Success",
-	"data": {
-		"total": 25,
-		"comments": [
-			{
-				"_id": "5d6d140cb42f6e2bc58767c3",
-				"creator": "5d69b8e95a5bf5782bbd61db",
-				"movieId": "5d6b8de7e9087b29d7c088a4",
-				"content": "Lorem ipsum.",
-				"createdAt": "2019-09-02T13:07:24.186Z",
-				"updatedAt": "2019-09-02T13:07:24.186Z",
-				"__v": 0
-			},
-			{
-				"_id": "5d6d1705aa33b22dce57f872",
-				"creator": "5d69b8e95a5bf5782bbd61db",
-				"movieId": "5d6b8de7e9087b29d7c088a4",
-				"content": "Lorem ipsum.",
-				"createdAt": "2019-09-02T13:20:05.387Z",
-				"updatedAt": "2019-09-02T13:20:05.387Z",
-				"__v": 0
-			}
-		]
-	}
+  "name":"Success",
+  "data":{
+    "total":5,
+    "comments":[
+      {
+        "_id":"5d6d52901bc191151d594f54",
+        "creator":{
+          "_id":"5d6d51545ac1be0017f0dff4",
+          "email":"piosik@netguru.com"
+        },
+        "movieId":{
+          "_id":"5d6d5166990262147c615ea6",
+          "title":"Interstellar"
+        },
+        "content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec pellentesque lorem, sed varius tellus. Phasellus pretium tortor vel porta sodales. Proin a ornare nisi, non lobortis urna. Aliquam vulputate quam ac congue pulvinar. Praesent aliquet egestas felis id vulputate. Pellentesque consectetur lorem nisl. Vivamus gravida fringilla interdum.",
+        "createdAt":"2019-09-02T17:34:08.560Z",
+        "updatedAt":"2019-09-02T17:34:08.560Z",
+        "__v":0
+      },
+      {
+        "_id":"5d6d529b1bc191151d594f55",
+        "creator":{
+          "_id":"5d6d51545ac1be0017f0dff4",
+          "email":"piosik@netguru.com"
+        },
+        "movieId":{
+          "_id":"5d6d5166990262147c615ea6",
+          "title":"Interstellar"
+        },
+        "content":"Proin a ornare nisi, non lobortis urna. Aliquam vulputate quam ac congue pulvinar. Praesent aliquet egestas felis id vulputate. Pellentesque consectetur lorem nisl. Vivamus gravida fringilla interdum.",
+        "createdAt":"2019-09-02T17:34:19.399Z",
+        "updatedAt":"2019-09-02T17:34:19.399Z",
+        "__v":0
+      }
+    ]
+  }
 }
 ```

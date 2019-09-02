@@ -32,7 +32,8 @@ export const postComments = async (
 		if (!movie) {
 			return next({
 				status: 422,
-				name: "MovieNotFound"
+				name: "MovieNotFound",
+				message: "Movie not found."
 			});
 		}
 
@@ -69,7 +70,9 @@ export const getComments = async (
 
 		const comments = await Comment.find()
 			.skip((page - 1) * perPage)
-			.limit(perPage);
+			.limit(perPage)
+			.populate({ path: "creator", select: "email" })
+			.populate({ path: "movieId", select: "title" });
 
 		res.status(200).json({ name: "Success", data: { total, comments } });
 	} catch (error) {
