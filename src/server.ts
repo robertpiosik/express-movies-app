@@ -12,8 +12,8 @@ mongoose
 		console.log(err);
 	});
 
-const port: string = process.env.PORT;
-const nodeEnv: string = process.env.NODE_ENV;
+const port = process.env.PORT;
+const nodeEnv = process.env.NODE_ENV;
 const server = app.listen(port, () => {
 	console.log(
 		"Server is running at http://localhost:%d in %s mode",

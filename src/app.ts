@@ -23,7 +23,7 @@ app.use(cors());
 app.use(responseTime());
 
 // Am I alive?
-app.get("/", (req, res, next) => {
+app.get("/", (req: Request, res: Response, next: NextFunction) => {
 	res.sendStatus(200);
 });
 
