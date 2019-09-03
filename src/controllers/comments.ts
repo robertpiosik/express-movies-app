@@ -13,7 +13,7 @@ export const postComments = async (
 		return next({
 			status: 401,
 			name: "NotAuthorized",
-			message: "You are not authorized."
+			message: "Not authorized."
 		});
 	}
 
@@ -23,7 +23,7 @@ export const postComments = async (
 		return next({
 			status: 422,
 			name: "MissingData",
-			message: "Content or movieId is missing"
+			message: "'content' or 'movieId' is missing"
 		});
 	}
 
