@@ -27,6 +27,7 @@ router.post(
 	],
 	authController.signup
 );
+
 router.post(
 	"/auth/login",
 	[
@@ -39,5 +40,7 @@ router.post(
 	],
 	authController.login
 );
+
+router.post("/auth/refresh-token",authController.refreshToken)
 
 export default router;

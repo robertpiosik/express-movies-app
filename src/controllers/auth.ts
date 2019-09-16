@@ -86,3 +86,10 @@ export const login = async (
 		console.log(err);
 	}
 };
+
+export const refreshToken = async (req: Request, res: Response, next: NextFunction) => {
+	// get token and verify if is valid
+	// extract user id
+	// sign new token
+	// send back
+}
