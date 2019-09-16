@@ -90,14 +90,14 @@ describe("POST /api/v1/auth/login", () => {
 			});
 	});
 
-	it("should return 404 if email is not registered", () => {
+	it("should return 401 if email is not registered", () => {
 		mockingoose(User).toReturn(null, "findOne");
 
 		return request(app)
 			.post("/api/v1/auth/login")
 			.send({ email: "notregistered@netguru.com", password: "12345678" })
 			.expect((res: Response) => {
-				expect(res.status).toBe(404);
+				expect(res.status).toBe(401);
 			});
 	});
 

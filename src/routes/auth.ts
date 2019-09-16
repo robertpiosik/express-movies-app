@@ -27,6 +27,17 @@ router.post(
 	],
 	authController.signup
 );
-router.post("/auth/login", authController.login);
+router.post(
+	"/auth/login",
+	[
+		body("email", "Please enter a valid email.")
+			.isEmail()
+			.normalizeEmail(),
+		body("password", "Please enter a password.")
+			.not()
+			.isEmpty()
+	],
+	authController.login
+);
 
 export default router;
