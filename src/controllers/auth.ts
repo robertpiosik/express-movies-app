@@ -13,6 +13,7 @@ export const signup = async (
 ) => {
 	const { email, password } = req.body;
 	const errors = validationResult(req);
+
 	if (!errors.isEmpty()) {
 		return next({
 			status: 422,
@@ -22,25 +23,16 @@ export const signup = async (
 		});
 	}
 
-	const user = await User.findOne({ email });
-	if (!user) {
-		const hashedPassword = await bcrypt.hash(password, 10);
-		const newUser = await new User({
-			email,
-			password: hashedPassword
-		}).save();
-		res.status(201).json({
-			name: "Success",
-			message: "User registered successfully.",
-			data: { id: newUser._id.toString() }
-		});
-	} else {
-		next({
-			status: 400,
-			name: "AlreadyRegistered",
-			message: "Email already registered."
-		});
-	}
+	const hashedPassword = await bcrypt.hash(password, 10);
+	const newUser = await new User({
+		email,
+		password: hashedPassword
+	}).save();
+	res.status(201).json({
+		name: "Success",
+		message: "User registered successfully.",
+		data: { id: newUser._id.toString() }
+	});
 };
 
 export const login = async (

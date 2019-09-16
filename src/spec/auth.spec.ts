@@ -32,7 +32,7 @@ describe("POST /api/v1/auth/signup", () => {
 			});
 	});
 
-	it("should return 400 if email is already registered", async () => {
+	it("should return 422 if email is already registered", async () => {
 		const _doc = {
 			id: "5d69b6110c88517530d0b246",
 			email: "piosik@netguru.com",
@@ -48,7 +48,7 @@ describe("POST /api/v1/auth/signup", () => {
 			.post("/api/v1/auth/signup")
 			.send({ email: "piosik@netguru.com", password: "12345678" })
 			.expect((res: Response) => {
-				expect(res.status).toBe(400);
+				expect(res.status).toBe(422);
 			});
 	});
 
