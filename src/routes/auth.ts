@@ -2,6 +2,7 @@ import { Router } from "express";
 import { body } from "express-validator";
 
 import * as authController from "../controllers/auth";
+import checkAuth from "../middleware/check-auth";
 import User from "../models/user";
 
 const router = Router();
@@ -41,6 +42,6 @@ router.post(
 	authController.login
 );
 
-router.post("/auth/refresh-token",authController.refreshToken)
+router.post("/auth/refresh-token", checkAuth, authController.refreshToken);
 
 export default router;

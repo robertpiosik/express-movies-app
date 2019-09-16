@@ -87,9 +87,34 @@ export const login = async (
 	}
 };
 
-export const refreshToken = async (req: Request, res: Response, next: NextFunction) => {
-	// get token and verify if is valid
-	// extract user id
-	// sign new token
-	// send back
-}
+export const refreshToken = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	if (!req.isAuth) {
+		return next({
+			status: 401,
+			name: "NotAuthorized",
+			message: "You are not authorized."
+		});
+	}
+	try {
+		const token = await jwt.sign(
+			{ userId: req.userId },
+			process.env.JWT_PRIVATE_KEY,
+			{ expiresIn: "2d" }
+		);
+		const expiresAt = Math.floor(Date.now() / 1000 + 172800);
+		res.status(200).json({
+			name: "Success",
+			message: "Token prolonged successfully.",
+			data: {
+				token,
+				expiresAt
+			}
+		});
+	} catch (err) {
+		console.log(err);
+	}
+};

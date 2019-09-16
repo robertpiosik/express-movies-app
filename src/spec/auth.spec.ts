@@ -151,11 +151,11 @@ describe("POST /api/v1/auth/login", () => {
 });
 
 describe("POST /api/v1/auth/refresh-token", () => {
-	it("should return 422 if no token is provided", () => {
+	it("should return 401 if not authorized", () => {
 		return request(app)
 			.post("/api/v1/auth/refresh-token")
 			.expect((res: Response) => {
-				expect(res.status).toBe(422);
+				expect(res.status).toBe(401);
 			});
 	});
 });

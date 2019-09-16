@@ -88,6 +88,24 @@ OMDB_API_KEY=""
 }
 ```
 
+**POST** `/api/v1/auth/refresh-token`
+
+_Authenticate yourself with Bearer Token._
+
+
+> Example success response:
+
+```json
+{
+    "name": "Success",
+    "message": "Token prolonged successfully.",
+    "data": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZDgwMDczMTBiNTgwNzc3YzQwNDZjMzgiLCJpYXQiOjE1Njg2NzQ5ODksImV4cCI6MTU2ODg0Nzc4OX0.C0m_xbV-GRgSr1qLzMZ9gX2auavxbQaLtZSb97lunO0",
+        "expiresAt": 1568847789
+    }
+}
+```
+
 **POST** `/api/v1/movies`
 
 _Authenticate yourself with Bearer Token._
