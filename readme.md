@@ -1,6 +1,6 @@
 # MOVIE APP
 
-The main purpose of this repository is to show a simple Node.js express REST API application written with TypeScript. Backend utilizes MongoDB as noSQL data storage for movie collection, users and comments data.
+The main purpose of this repository is to show a simple Node.js express REST API application written with TypeScript. Backend utilizes MongoDB as noSQL database for movie collection, users and comments data.
 
 Features:
 
