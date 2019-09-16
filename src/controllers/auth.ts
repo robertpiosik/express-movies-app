@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { validationResult } from "express-validator";
 
 import User from "../models/user";
 
@@ -10,29 +11,14 @@ export const signup = async (
 	res: Response,
 	next: NextFunction
 ) => {
-	const { email, password }: { email: string; password: string } = req.body;
-
-	if (!email || !password) {
+	const { email, password } = req.body;
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
 		return next({
 			status: 422,
-			name: "MissingAuthData",
-			message: "Email or password is missing."
-		});
-	}
-
-	if (!validator.isEmail(email)) {
-		return next({
-			status: 422,
-			name: "InvalidEmail",
-			message: "Provided E-mail address is invalid."
-		});
-	}
-
-	if (password.length < 8) {
-		return next({
-			status: 422,
-			name: "TooShortPassword",
-			message: "Provided password is too short."
+			name: "SignupErrors",
+			message: "Signup errors occured.",
+			data: errors.array()
 		});
 	}
 
