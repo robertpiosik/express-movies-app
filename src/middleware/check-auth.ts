@@ -1,12 +1,18 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
+interface ResponseError extends Error {
+	status?: number;
+	data?: any;
+}
+
 export default async (req: Request, res: Response, next: NextFunction) => {
 	const authorizationHeader = req.get("Authorization");
 
 	if (!authorizationHeader) {
-		req.isAuth = false;
-		return next();
+		const error: ResponseError = new Error("Not authorized.");
+		error.status = 401;
+		return next(error);
 	}
 
 	const token = authorizationHeader.split(" ")[1];
@@ -19,7 +25,9 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 		req.userId = decodedToken.userId;
 		next();
 	} catch (err) {
-		req.isAuth = false;
-		next();
+		const error: ResponseError = new Error("Not authorized.");
+		error.status = 401;
+		error.data = err;
+		return next(error);
 	}
 };

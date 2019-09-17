@@ -18,12 +18,6 @@ export const postComments = async (
 	const { content, movieId } = req.body;
 	const errors = validationResult(req);
 
-	if (!req.isAuth) {
-		const error: ResponseError = new Error("Not authorized.");
-		error.status = 401;
-		return next(error);
-	}
-
 	if (!errors.isEmpty()) {
 		const error: ResponseError = new Error("Validation errors.");
 		error.status = 422;

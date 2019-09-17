@@ -46,12 +46,6 @@ export const postMovies = async (
 ) => {
 	const errors = validationResult(req);
 
-	if (!req.isAuth) {
-		const error: ResponseError = new Error("Not authorized.");
-		error.status = 401;
-		return next(error);
-	}
-
 	if (!errors.isEmpty()) {
 		const error: ResponseError = new Error("Validation failed.");
 		error.status = 422;
