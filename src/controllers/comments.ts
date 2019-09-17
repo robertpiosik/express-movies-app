@@ -21,6 +21,7 @@ export const postComments = async (
 	if (!errors.isEmpty()) {
 		const error: ResponseError = new Error("Validation errors.");
 		error.status = 422;
+		error.data = errors.array();
 		return next(error);
 	}
 

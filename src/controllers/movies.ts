@@ -44,22 +44,21 @@ export const postMovies = async (
 	res: Response,
 	next: NextFunction
 ) => {
+	const { title } = req.body;
 	const errors = validationResult(req);
 
 	if (!errors.isEmpty()) {
 		const error: ResponseError = new Error("Validation failed.");
 		error.status = 422;
+		error.data = errors.array();
 		return next(error);
 	}
-
-	const { title } = req.body;
 
 	const omdbEndpoint = encodeURI(
 		`http://www.omdbapi.com/?t=${title}&apikey=${process.env.OMDB_API_KEY}`
 	);
 	try {
-		const movieDataResponse = await fetch(omdbEndpoint);
-		const movieData = await movieDataResponse.json();
+		const movieData = await fetch(omdbEndpoint).then(res => res.json());
 
 		if (movieData.Response === "False") {
 			const error: ResponseError = new Error("Movie not found in external db.");
@@ -89,7 +88,7 @@ export const postMovies = async (
 				data: newMovie
 			});
 		} else {
-			const error: ResponseError = new Error("Already exists.");
+			const error: ResponseError = new Error("Movie already exists.");
 			error.status = 409;
 			next(error);
 		}
