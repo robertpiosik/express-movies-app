@@ -16,8 +16,8 @@ export const signup = async (
 	if (!errors.isEmpty()) {
 		return next({
 			status: 422,
-			name: "SignupErrors",
-			message: "Signup errors occured.",
+			name: "ValidationErrors",
+			message: "Validation errors occured.",
 			data: errors.array()
 		});
 	}
@@ -44,8 +44,8 @@ export const login = async (
 	if (!errors.isEmpty()) {
 		return next({
 			status: 422,
-			name: "LoginErrors",
-			message: "Login errors occured.",
+			name: "ValidationErrors",
+			message: "Validation errors occured.",
 			data: errors.array()
 		});
 	}

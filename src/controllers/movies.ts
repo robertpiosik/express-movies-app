@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import { validationResult } from "express-validator";
 import fetch from "node-fetch";
 
 import Movie from "../models/movie";
@@ -36,6 +37,8 @@ export const postMovies = async (
 	res: Response,
 	next: NextFunction
 ) => {
+	const errors = validationResult(req);
+
 	if (!req.isAuth) {
 		return next({
 			status: 401,
@@ -44,15 +47,16 @@ export const postMovies = async (
 		});
 	}
 
-	const { title } = req.body;
-
-	if (!title) {
+	if (!errors.isEmpty()) {
 		return next({
 			status: 422,
-			name: "MissingTitle",
-			message: "Title is missing."
+			name: "ValidationErrors",
+			message: "Validation errors occured.",
+			data: errors.array()
 		});
 	}
+
+	const { title } = req.body;
 
 	const omdbEndpoint = encodeURI(
 		`http://www.omdbapi.com/?t=${title}&apikey=${process.env.OMDB_API_KEY}`

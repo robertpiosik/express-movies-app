@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import { validationResult } from "express-validator";
 
 import Movie from "../models/movie";
 import Comment from "../models/comment";
@@ -9,6 +10,9 @@ export const postComments = async (
 	res: Response,
 	next: NextFunction
 ) => {
+	const { content, movieId } = req.body;
+	const errors = validationResult(req);
+
 	if (!req.isAuth) {
 		return next({
 			status: 401,
@@ -17,13 +21,12 @@ export const postComments = async (
 		});
 	}
 
-	const { content, movieId } = req.body;
-
-	if (!content || !movieId) {
+	if (!errors.isEmpty()) {
 		return next({
 			status: 422,
-			name: "MissingData",
-			message: "'content' or 'movieId' is missing"
+			name: "ValidationErrors",
+			message: "Validation errors occured.",
+			data: errors.array()
 		});
 	}
 

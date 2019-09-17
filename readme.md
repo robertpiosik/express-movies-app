@@ -22,7 +22,7 @@ Features:
 * Configure environment variables
 
 ```
-_.env_
+.env
 
 NODE_ENV="development"
 PORT="8000"
