@@ -9,7 +9,7 @@
 		"strict": true,
 		"moduleResolution": "node",
 		"esModuleInterop": true,
-		"types": ["jest"]
+		"types": ["mocha"]
 	},
 	"exclude": ["node_modules", "**/*.spec.ts"]
 }
