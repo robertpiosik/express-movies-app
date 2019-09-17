@@ -39,11 +39,11 @@ app.use("/api/v1", commentsRoutes);
 
 // Error handling
 app.use((error: ErrorRequestHandler, req: Request, res: Response, next: NextFunction) => {
+	console.log(error);
 	const status = error.status || 500;
-	const name = error.name || "ServerError";
-	const message = error.message || "";
+	const message = error.message;
 	const data = error.data;
-	res.status(status).json({ name, message, data });
+	res.status(status).json({ message, data });
 });
 
 export default app;

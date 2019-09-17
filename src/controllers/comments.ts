@@ -5,6 +5,11 @@ import Movie from "../models/movie";
 import Comment from "../models/comment";
 import User from "../models/user";
 
+interface ResponseError extends Error {
+	status?: number;
+	data?: any;
+}
+
 export const postComments = async (
 	req: Request,
 	res: Response,
@@ -14,30 +19,23 @@ export const postComments = async (
 	const errors = validationResult(req);
 
 	if (!req.isAuth) {
-		return next({
-			status: 401,
-			name: "NotAuthorized",
-			message: "Not authorized."
-		});
+		const error: ResponseError = new Error("Not authorized.");
+		error.status = 401;
+		return next(error);
 	}
 
 	if (!errors.isEmpty()) {
-		return next({
-			status: 422,
-			name: "ValidationErrors",
-			message: "Validation errors occured.",
-			data: errors.array()
-		});
+		const error: ResponseError = new Error("Validation errors.");
+		error.status = 422;
+		return next(error);
 	}
 
 	try {
 		const movie = await Movie.findOne({ _id: movieId });
 		if (!movie) {
-			return next({
-				status: 422,
-				name: "MovieNotFound",
-				message: "Movie not found."
-			});
+			const error: ResponseError = new Error("Invalid movie");
+			error.status = 422;
+			return next(error);
 		}
 
 		const newComment = await new Comment({
@@ -56,8 +54,10 @@ export const postComments = async (
 		}
 
 		res.status(201).json({ name: "Success", data: newComment });
-	} catch (error) {
-		next({ data: error });
+	} catch (err) {
+		const error: ResponseError = new Error("Server error.");
+		error.data = err;
+		next(error);
 	}
 };
 
@@ -78,9 +78,9 @@ export const getComments = async (
 			.populate({ path: "movieId", select: "title" });
 
 		res.status(200).json({ name: "Success", data: { total, comments } });
-	} catch (error) {
-		next({
-			data: error
-		});
+	} catch (err) {
+		const error: ResponseError = new Error("Server error.");
+		error.data = err;
+		next(error);
 	}
 };

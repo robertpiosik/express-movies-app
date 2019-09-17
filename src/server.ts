@@ -6,7 +6,7 @@ import app from "./app";
 mongoose
 	.connect(
 		`${process.env.DATABASE_CONNECTION}`,
-		{ useNewUrlParser: true, useCreateIndex: true }
+		{ useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
 	)
 	.catch(err => {
 		console.log(err);

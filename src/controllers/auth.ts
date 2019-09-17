@@ -1,9 +1,14 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { validationResult } from "express-validator";
 
 import User from "../models/user";
+
+interface ResponseError extends Error {
+	status?: number;
+	data?: any;
+}
 
 export const signup = async (
 	req: Request,
@@ -14,12 +19,10 @@ export const signup = async (
 	const errors = validationResult(req);
 
 	if (!errors.isEmpty()) {
-		return next({
-			status: 422,
-			name: "ValidationErrors",
-			message: "Validation errors occured.",
-			data: errors.array()
-		});
+		const error: ResponseError = new Error("Validation failed.");
+		error.status = 422;
+		error.data = errors.array();
+		return next(error);
 	}
 
 	const hashedPassword = await bcrypt.hash(password, 10);
@@ -42,12 +45,10 @@ export const login = async (
 	const { email, password } = req.body;
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
-		return next({
-			status: 422,
-			name: "ValidationErrors",
-			message: "Validation errors occured.",
-			data: errors.array()
-		});
+		const error: ResponseError = new Error("Validation failed.");
+		error.status = 422;
+		error.data = errors.array();
+		return next(error);
 	}
 
 	try {
@@ -69,21 +70,19 @@ export const login = async (
 					}
 				});
 			} else {
-				next({
-					status: 401,
-					name: "InvalidCredentials",
-					message: "Invalid email or password."
-				});
+				const error: ResponseError = new Error("Invalid credentials.");
+				error.status = 401;
+				next(error);
 			}
 		} else {
-			next({
-				status: 401,
-				name: "InvalidCredentials",
-				message: "Invalid email or password."
-			});
+			const error: ResponseError = new Error("Invalid credentials.");
+			error.status = 401;
+			next(error);
 		}
 	} catch (err) {
-		console.log(err);
+		const error: ResponseError = new Error("DB Error.");
+		error.data = err;
+		next(err);
 	}
 };
 
@@ -93,11 +92,9 @@ export const refreshToken = async (
 	next: NextFunction
 ) => {
 	if (!req.isAuth) {
-		return next({
-			status: 401,
-			name: "NotAuthorized",
-			message: "You are not authorized."
-		});
+		const error: ResponseError = new Error("Not authorized.");
+		error.status = 401;
+		return next(error);
 	}
 	try {
 		const token = await jwt.sign(
@@ -115,6 +112,8 @@ export const refreshToken = async (
 			}
 		});
 	} catch (err) {
-		console.log(err);
+		const error: ResponseError = new Error("Error during signing a token.");
+		error.data = err;
+		next(error);
 	}
 };

@@ -5,6 +5,11 @@ import fetch from "node-fetch";
 import Movie from "../models/movie";
 import User from "../models/user";
 
+interface ResponseError extends Error {
+	status?: number;
+	data?: any;
+}
+
 export const getMovies = async (
 	req: Request,
 	res: Response,
@@ -27,8 +32,10 @@ export const getMovies = async (
 				populate: { path: "creator", select: "email" }
 			});
 		res.status(200).json({ name: "Success", data: { total, movies } });
-	} catch (error) {
-		next({ data: error });
+	} catch (err) {
+		const error: ResponseError = new Error("Server error.");
+		error.data = err;
+		next(error);
 	}
 };
 
@@ -40,20 +47,15 @@ export const postMovies = async (
 	const errors = validationResult(req);
 
 	if (!req.isAuth) {
-		return next({
-			status: 401,
-			name: "NotAuthorized",
-			message: "You are not authorized."
-		});
+		const error: ResponseError = new Error("Not authorized.");
+		error.status = 401;
+		return next(error);
 	}
 
 	if (!errors.isEmpty()) {
-		return next({
-			status: 422,
-			name: "ValidationErrors",
-			message: "Validation errors occured.",
-			data: errors.array()
-		});
+		const error: ResponseError = new Error("Validation failed.");
+		error.status = 422;
+		return next(error);
 	}
 
 	const { title } = req.body;
@@ -66,11 +68,9 @@ export const postMovies = async (
 		const movieData = await movieDataResponse.json();
 
 		if (movieData.Response === "False") {
-			return next({
-				status: 404,
-				name: "MovieNotFound",
-				message: `OMDb doesn't have "${title}". Try with another one.`
-			});
+			const error: ResponseError = new Error("Movie not found in external db.");
+			error.status = 404;
+			return next(error);
 		}
 
 		const movie = await Movie.findOne({ title });
@@ -95,13 +95,13 @@ export const postMovies = async (
 				data: newMovie
 			});
 		} else {
-			next({
-				status: 409,
-				name: "AlreadyExists",
-				message: "Already figure in the database."
-			});
+			const error: ResponseError = new Error("Already exists.");
+			error.status = 409;
+			next(error);
 		}
-	} catch (error) {
-		next({ data: error });
+	} catch (err) {
+		const error: ResponseError = new Error("Server error.");
+		error.data = err;
+		next(error);
 	}
 };
