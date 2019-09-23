@@ -24,7 +24,7 @@ app.use(responseTime());
 
 // Am I alive?
 app.get("/", (req: Request, res: Response, next: NextFunction) => {
-	res.sendStatus(200);
+	res.send('alive');
 });
 
 // Check authorization header
