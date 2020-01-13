@@ -13,11 +13,11 @@ Features:
 
 * Clone the repository
 
-`git clone https://github.com/robertpiosik/netguru-movies.git`
+`git clone https://github.com/robertpiosik/express-movies-app.git`
 
 * Install dependencies
 
-`cd netguru-movies && npm i`
+`cd express-movies-app && npm i`
 
 * Configure environment variables
 
@@ -47,7 +47,7 @@ OMDB_API_KEY=""
 
 ```json
 {
-	"email": "piosik@netguru.com",
+	"email": "robert@piosik.com",
 	"password": "q{UHh^)9@<qBJJ3!"
 }
 ```
@@ -70,7 +70,7 @@ OMDB_API_KEY=""
 
 ```json
 {
-	"email": "piosik@netguru.com",
+	"email": "robert@piosik.com",
 	"password": "q{UHh^)9@<qBJJ3!"
 }
 ```
@@ -197,7 +197,7 @@ _Authenticate yourself with Bearer Token._
             "_id": "5d6d1705aa33b22dce57f872",
             "creator": {
               "_id": "5d69b8e95a5bf5782bbd61db",
-              "email": "piosik@netguru.com"
+              "email": "robert@piosik.com"
             },
             "content": "Lorem ipsum.",
             "createdAt": "2019-09-02T13:20:05.387Z",
@@ -207,7 +207,7 @@ _Authenticate yourself with Bearer Token._
             "_id": "5d6d1733aa33b22dce57f873",
             "creator": {
               "_id": "5d69b8e95a5bf5782bbd61db",
-              "email": "piosik@netguru.com"
+              "email": "robert@piosik.com"
             },
             "content": "Lorem ipsum.",
             "createdAt": "2019-09-02T13:20:51.815Z",
@@ -279,7 +279,7 @@ _Authenticate yourself with Bearer Token._
         "_id":"5d6d52901bc191151d594f54",
         "creator":{
           "_id":"5d6d51545ac1be0017f0dff4",
-          "email":"piosik@netguru.com"
+          "email":"robert@piosik.com"
         },
         "movieId":{
           "_id":"5d6d5166990262147c615ea6",
@@ -294,7 +294,7 @@ _Authenticate yourself with Bearer Token._
         "_id":"5d6d529b1bc191151d594f55",
         "creator":{
           "_id":"5d6d51545ac1be0017f0dff4",
-          "email":"piosik@netguru.com"
+          "email":"robert@piosik.com"
         },
         "movieId":{
           "_id":"5d6d5166990262147c615ea6",
